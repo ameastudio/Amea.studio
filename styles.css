@@ -33,3 +33,28 @@ footer{background:#813f5c;color:#fff;padding:55px 18px 24px}.footer-wordmark{fon
   .footer-grid{grid-template-columns:repeat(4,1fr)}.modal{align-items:center;padding:30px}.modal-card{display:grid;grid-template-columns:1.05fr .95fr;max-height:90vh}.gallery img{height:90vh;aspect-ratio:auto}.product-detail{padding:60px 35px;overflow:auto;max-height:90vh}
   .shop-page{padding:110px 6vw}.shop-grid{grid-template-columns:repeat(3,1fr);gap:35px 16px}
 }
+
+/* v2 refinements */
+.drawer-logo{
+  width:92px;
+  height:92px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+.drawer-logo img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+}
+.nav.shop-nav{
+  background:#fff9fcf2;
+  color:var(--pink);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid #f7e6ed;
+}
+.nav.shop-nav .wordmark{
+  color:var(--pink);
+}

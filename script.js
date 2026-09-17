@@ -21,8 +21,8 @@ addEventListener("scroll",()=>$("#nav").classList.toggle("scrolled",scrollY>40))
 $("#popularGrid").innerHTML=PRODUCTS.filter(x=>x.popular).slice(0,3).map(card).join("");
 $("#arrivalRow").innerHTML=PRODUCTS.filter(x=>x.new).map(card).join("");
 function renderShop(){let cats=["All","Dresses","Skirt Sets","Short Sets","Collection"];$("#filters").innerHTML=cats.map(c=>`<button class="${shopCategory===c?"active":""}" onclick="setCategory('${c}')">${c}</button>`).join("");let list=shopCategory==="All"||shopCategory==="Collection"?PRODUCTS:PRODUCTS.filter(x=>x.category===shopCategory);$("#shopTitle").textContent=shopCategory==="All"?"All Pieces":shopCategory;$("#shopGrid").innerHTML=list.map(card).join("")}
-function showShop(){location.hash="shop";$("#home").style.display="none";$("#shopPage").classList.add("show");$("#shopPage").setAttribute("aria-hidden","false");window.scrollTo(0,0);renderShop()}
-function hideShop(){$("#shopPage").classList.remove("show");$("#shopPage").setAttribute("aria-hidden","true");$("#home").style.display="block";location.hash="home";window.scrollTo(0,0)}
+function showShop(){location.hash="shop";$("#nav").classList.add("shop-nav");$("#home").style.display="none";$("#shopPage").classList.add("show");$("#shopPage").setAttribute("aria-hidden","false");window.scrollTo(0,0);renderShop()}
+function hideShop(){$("#nav").classList.remove("shop-nav");$("#shopPage").classList.remove("show");$("#shopPage").setAttribute("aria-hidden","true");$("#home").style.display="block";location.hash="home";window.scrollTo(0,0)}
 function setCategory(c){shopCategory=c;showShop()}
 $$(".drawer a[data-category]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();closeLayers();setCategory(a.dataset.category)}));
 addEventListener("hashchange",()=>{if(location.hash==="#shop")showShop()});
