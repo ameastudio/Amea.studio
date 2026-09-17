@@ -1,10 +1,10 @@
 const PRODUCTS=[
- {id:"eve",name:"Eve",price:15000,category:"Dresses",img:"editorial.png",popular:true,new:true,sold:false,custom:true},
- {id:"flora",name:"Flora",price:15000,category:"Dresses",img:"hero.png",popular:true,new:true,sold:false,custom:true},
- {id:"aurora",name:"Aurora",price:15000,category:"Dresses",img:"argentina-lookbook.png",popular:true,new:true,sold:false,custom:false},
- {id:"stripe-skirt",name:"The Stripe Mini",price:8500,category:"Skirt Sets",img:"stripe-lookbook.png",popular:false,new:true,sold:false,custom:false},
- {id:"eden-set",name:"Eden Set",price:12000,category:"Skirt Sets",img:"editorial.png",popular:false,new:false,sold:false,custom:true},
- {id:"summer-short-set",name:"Summer Short Set",price:12000,category:"Short Sets",img:"hero.png",popular:false,new:false,sold:true,custom:false}
+ {id:"eve",name:"Eve",price:15000,category:"Dresses",img:"editorial.png",images:["editorial.png"],popular:true,new:true,sold:false,custom:true},
+ {id:"flora",name:"Flora",price:15000,category:"Dresses",img:"hero.png",images:["hero.png"],popular:true,new:true,sold:false,custom:true},
+ {id:"aurora",name:"Aurora",price:15000,category:"Dresses",img:"argentina-lookbook.png",images:["argentina-lookbook.png"],popular:true,new:true,sold:false,custom:false},
+ {id:"stripe-skirt",name:"The Stripe Mini",price:8500,category:"Skirt Sets",img:"stripe-lookbook.png",images:["stripe-lookbook.png"],popular:false,new:true,sold:false,custom:false},
+ {id:"eden-set",name:"Eden Set",price:12000,category:"Skirt Sets",img:"editorial.png",images:["editorial.png"],popular:false,new:false,sold:false,custom:true},
+ {id:"summer-short-set",name:"Summer Short Set",price:12000,category:"Short Sets",img:"hero.png",images:["hero.png"],popular:false,new:false,sold:true,custom:false}
 ];
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 let bag=JSON.parse(localStorage.getItem("amea_bag")||"[]"), fav=JSON.parse(localStorage.getItem("amea_fav")||"[]");
@@ -26,11 +26,36 @@ function hideShop(){$("#nav").classList.remove("shop-nav");$("#shopPage").classL
 function setCategory(c){shopCategory=c;showShop()}
 $$(".drawer a[data-category]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();closeLayers();setCategory(a.dataset.category)}));
 addEventListener("hashchange",()=>{if(location.hash==="#shop")showShop()});
-function openProduct(id){current=PRODUCTS.find(x=>x.id===id);if(!current)return;selectedSize="";$("#productImage").src=current.img;$("#productName").textContent=current.name;$("#productPrice").textContent=format(current.price);$("#productCategory").textContent=current.category.toUpperCase();$("#sizes").innerHTML=["XS","S","M","L","XL"].map(s=>`<button onclick="chooseSize('${s}',this)">${s}</button>`).join("");$("#customBlock").style.display=current.custom?"block":"none";$("#productFavorite").textContent=(fav.includes(id)?"♥ Remove from Favorites":"♡ Add to Favorites");$("#addToBag").style.display=current.sold?"none":"block";$("#notifyButton").style.display=current.sold?"block":"none";$("#productModal").classList.add("show");$("#productModal").setAttribute("aria-hidden","false");document.body.classList.add("lock")}
-function closeModal(){$("#productModal").classList.remove("show");$("#productModal").setAttribute("aria-hidden","true");$("#productImage").classList.remove("zoom");document.body.classList.remove("lock")}
+function openProduct(id){
+  current=PRODUCTS.find(x=>x.id===id);
+  if(!current)return;
+  selectedSize="";
+  const imgs=(current.images&&current.images.length?current.images:[current.img]);
+  $("#productGalleryTrack").innerHTML=imgs.map((src,i)=>`<div class="product-gallery-slide"><img src="${src}" alt="${current.name} photo ${i+1}"></div>`).join("");
+  $("#galleryDots").innerHTML=imgs.length>1?imgs.map((_,i)=>`<span class="gallery-dot ${i===0?"active":""}"></span>`).join(""):"";
+  $(".gallery-hint").style.display=imgs.length>1?"block":"none";
+  const track=$("#productGalleryTrack");
+  track.scrollLeft=0;
+  track.onscroll=()=>{
+    const index=Math.round(track.scrollLeft/track.clientWidth);
+    $$(".gallery-dot").forEach((d,i)=>d.classList.toggle("active",i===index));
+  };
+  $("#productName").textContent=current.name;
+  $("#productPrice").textContent=format(current.price);
+  $("#productCategory").textContent=current.category.toUpperCase();
+  $("#sizes").innerHTML=["XS","S","M","L","XL"].map(s=>`<button onclick="chooseSize('${s}',this)">${s}</button>`).join("");
+  $("#customBlock").style.display=current.custom?"block":"none";
+  $("#productFavorite").textContent=(fav.includes(id)?"♥ Remove from Favorites":"♡ Add to Favorites");
+  $("#addToBag").style.display=current.sold?"none":"block";
+  $("#notifyButton").style.display=current.sold?"block":"none";
+  $("#productModal").classList.add("show");
+  $("#productModal").setAttribute("aria-hidden","false");
+  document.body.classList.add("lock");
+}
+function closeModal(){$("#productModal").classList.remove("show");$("#productModal").setAttribute("aria-hidden","true");document.body.classList.remove("lock")}
 $$("[data-close-modal]").forEach(x=>x.onclick=closeModal);$("#productModal").addEventListener("click",e=>{if(e.target===$("#productModal"))closeModal()});
 function chooseSize(s,b){selectedSize=s;$$(".sizes button").forEach(x=>x.classList.remove("selected"));b.classList.add("selected")}
-$("#productImage").onclick=()=>$("#productImage").classList.toggle("zoom");
+
 $("#productFavorite").onclick=()=>{if(!current)return;fav=fav.includes(current.id)?fav.filter(x=>x!==current.id):[...fav,current.id];save();$("#productFavorite").textContent=(fav.includes(current.id)?"♥ Remove from Favorites":"♡ Add to Favorites");toast(fav.includes(current.id)?"Saved to favorites ♡":"Removed from favorites")}
 $("#addToBag").onclick=()=>{if(!selectedSize)return toast("Please choose a size first");let item={id:crypto.randomUUID(),productId:current.id,name:current.name,price:current.price,img:current.img,size:selectedSize,custom:current.custom?$("#customPreset").value:"",request:current.custom?$("#customRequest").value:""};bag.push(item);save();closeModal();toast("Added to your bag ♡")}
 $("#notifyButton").onclick=()=>{let email=prompt("Email address for restock notification:");if(email)toast("Restock request saved on this device — backend email delivery still needs connection")}
