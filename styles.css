@@ -145,3 +145,42 @@ footer{background:#813f5c;color:#fff;padding:55px 18px 24px}.footer-wordmark{fon
     padding:42px 42px 55px;
   }
 }
+
+
+/* Main Améa logo swap */
+.wordmark{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:132px;
+  max-width:40vw;
+}
+.wordmark img{
+  display:block;
+  width:100%;
+  height:auto;
+}
+.wordmark .logo-shop{display:none}
+.nav.scrolled .wordmark .logo-home,
+.nav.shop-nav .wordmark .logo-home{display:none}
+.nav.scrolled .wordmark .logo-shop,
+.nav.shop-nav .wordmark .logo-shop{display:block}
+
+.footer-wordmark{
+  width:150px;
+  max-width:48vw;
+}
+.footer-wordmark img{
+  width:100%;
+  height:auto;
+  display:block;
+}
+
+@media(min-width:700px){
+  .wordmark{
+    width:150px;
+  }
+  .footer-wordmark{
+    width:180px;
+  }
+}
