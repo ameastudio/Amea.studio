@@ -147,40 +147,50 @@ footer{background:#813f5c;color:#fff;padding:55px 18px 24px}.footer-wordmark{fon
 }
 
 
-/* Main Améa logo swap */
-.wordmark{
+/* Header alignment fix — keeps menu, logo and icons centered inside the bar */
+.nav{
+  height:64px !important;
+  min-height:64px;
+  padding:0 16px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+}
+.nav .menu-button{
+  position:relative;
+  top:0;
+  margin:0;
+  align-self:center;
+}
+.nav .wordmark{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  margin:0;
+  line-height:1;
   display:flex;
   align-items:center;
   justify-content:center;
-  width:132px;
-  max-width:40vw;
 }
-.wordmark img{
-  display:block;
-  width:100%;
-  height:auto;
+.nav .nav-actions{
+  margin-left:auto;
+  height:64px;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
 }
-.wordmark .logo-shop{display:none}
-.nav.scrolled .wordmark .logo-home,
-.nav.shop-nav .wordmark .logo-home{display:none}
-.nav.scrolled .wordmark .logo-shop,
-.nav.shop-nav .wordmark .logo-shop{display:block}
-
-.footer-wordmark{
-  width:150px;
-  max-width:48vw;
+.nav .icon-button{
+  height:44px;
+  display:grid;
+  place-items:center;
+  align-self:center;
 }
-.footer-wordmark img{
-  width:100%;
-  height:auto;
-  display:block;
-}
-
 @media(min-width:700px){
-  .wordmark{
-    width:150px;
+  .nav{
+    height:64px !important;
+    min-height:64px;
+    padding:0 24px !important;
   }
-  .footer-wordmark{
-    width:180px;
-  }
+  .nav .nav-actions{height:64px}
 }
