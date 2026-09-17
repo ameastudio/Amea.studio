@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#fff9fc">
+  <title>Améa — Crochet & Knitwear</title>
+  <meta name="description" content="Améa — feminine crochet and knitwear, made with intention.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="scrim" id="scrim"></div>
+
+  <header class="nav" id="nav">
+    <button class="icon-button menu-button" id="menuBtn" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <a href="#home" class="wordmark" aria-label="Améa home">améa</a>
+
+    <div class="nav-actions">
+      <button class="icon-button" id="searchBtn" aria-label="Search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.7"/><path d="m16 16 4 4"/></svg>
+      </button>
+      <button class="icon-button" id="favBtn" aria-label="Favorites">
+        <svg viewBox="0 0 24 24"><path d="M20.8 4.8c-2-2-5.1-1.9-7 .1L12 6.8l-1.8-1.9a4.8 4.8 0 0 0-7 .1c-1.8 2-1.6 5 .3 6.9L12 20l8.4-8.2c1.9-1.9 2.1-5 .4-7Z"/></svg>
+        <span class="count" id="favCount">0</span>
+      </button>
+      <button class="icon-button" id="bagBtn" aria-label="Shopping bag">
+        <svg viewBox="0 0 24 24"><path d="M5 8h14l-1 13H6L5 8Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg>
+        <span class="count" id="bagCount">0</span>
+      </button>
+    </div>
+  </header>
+
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer-top">
+      <div class="drawer-logo">améa</div>
+      <button class="drawer-close" data-close aria-label="Close menu">×</button>
+    </div>
+    <div class="menu-label">SHOP</div>
+    <a href="#shop" data-category="Dresses">Dresses</a>
+    <a href="#shop" data-category="Skirt Sets">Skirt Sets</a>
+    <a href="#shop" data-category="Short Sets">Short Sets</a>
+    <a href="#new">New Arrivals</a>
+    <a href="#collection">Collection</a>
+    <div class="menu-label second">EXPLORE</div>
+    <a href="#about">About Améa</a>
+    <a href="#lookbook">Lookbook</a>
+    <a href="#contact">Contact</a>
+    <a href="#faq">FAQ</a>
+    <div class="drawer-note">CROCHET & KNITWEAR</div>
+  </aside>
+
+  <aside class="side-panel" id="searchPanel" aria-hidden="true">
+    <div class="panel-head"><h2>Search Améa</h2><button data-close>×</button></div>
+    <input class="search-input" id="searchInput" type="search" placeholder="Search pieces…" autocomplete="off">
+    <div id="searchResults" class="panel-body"></div>
+  </aside>
+
+  <aside class="side-panel" id="favPanel" aria-hidden="true">
+    <div class="panel-head"><h2>Favorites</h2><button data-close>×</button></div>
+    <div id="favItems" class="panel-body"></div>
+  </aside>
+
+  <aside class="side-panel" id="bagPanel" aria-hidden="true">
+    <div class="panel-head"><h2>Your Bag</h2><button data-close>×</button></div>
+    <div id="bagItems" class="panel-body"></div>
+  </aside>
+
+  <main id="home">
+    <section class="hero">
+      <img src="hero.png" alt="Améa crochet and knitwear campaign">
+      <div class="hero-shade"></div>
+      <a class="outline-cta" href="#shop">SHOP NOW</a>
+    </section>
+
+    <section class="section popular" id="popular">
+      <div class="section-heading">
+        <div>
+          <span>THE EDIT</span>
+          <h1>Popular Purchases</h1>
+        </div>
+        <button class="text-link" onclick="showShop()">View all</button>
+      </div>
+      <div class="popular-grid" id="popularGrid"></div>
+    </section>
+
+    <section class="editorial" id="collection">
+      <img src="editorial.png" alt="Améa summer crochet collection">
+      <div class="editorial-shade"></div>
+      <a class="outline-cta" href="#shop" onclick="setCategory('Collection')">SHOP COLLECTION</a>
+    </section>
+
+    <section class="section" id="new">
+      <div class="section-heading">
+        <div><span>JUST IN</span><h2>New Arrivals</h2></div>
+        <button class="text-link" onclick="showShop()">View all</button>
+      </div>
+      <div class="arrival-row" id="arrivalRow"></div>
+    </section>
+
+    <section class="about-strip" id="about">
+      <div class="about-copy">
+        <span>ABOUT AMÉA</span>
+        <h2>Made slowly.<br>Worn boldly.</h2>
+        <p>Améa is a feminine crochet and knitwear label built around expressive color, beautiful texture and pieces that feel special from the first wear.</p>
+        <button class="text-link light" onclick="openInfo('about')">Discover Améa</button>
+      </div>
+      <img src="stripe-lookbook.png" alt="Améa knitwear lookbook">
+    </section>
+
+    <section class="lookbook" id="lookbook">
+      <div class="lookbook-copy">
+        <span>LOOKBOOK</span>
+        <h2>Summer, the Améa way.</h2>
+      </div>
+      <div class="lookbook-images">
+        <img src="argentina-lookbook.png" alt="Améa crochet lookbook">
+        <img src="editorial.png" alt="Améa editorial moodboard">
+      </div>
+    </section>
+
+    <section class="newsletter">
+      <span>STAY CLOSE</span>
+      <h2>Become an Améa Babe</h2>
+      <p>Be the first to know about new drops, exclusive pieces & Améa moments.</p>
+      <form id="newsletterForm">
+        <input type="email" required placeholder="Your email address">
+        <button type="submit">SUBSCRIBE</button>
+      </form>
+    </section>
+
+    <section class="faq-section" id="faq">
+      <div class="section-heading"><div><span>NEED TO KNOW</span><h2>FAQ</h2></div></div>
+      <div class="faq-list">
+        <details><summary>How long does an Améa piece take?</summary><p>Standard made-to-order pieces can take up to two weeks. Your exact timing is shown during ordering.</p></details>
+        <details><summary>Can I customize my piece?</summary><p>Selected products can be customized. Eligible options and any additional cost are shown on the product page.</p></details>
+        <details><summary>Pickup or delivery?</summary><p>Both are supported. Available options and the fulfillment cost are shown before payment.</p></details>
+        <details><summary>What is the returns policy?</summary><p>Améa does not offer returns, exchanges or refunds. Eligible alterations may be available, and workmanship issues can be reviewed by Améa.</p></details>
+        <details><summary>Can I cancel my order?</summary><p>Orders may be cancelled from your account within 48 hours, subject to production/customization status.</p></details>
+      </div>
+    </section>
+
+    <footer id="contact">
+      <div class="footer-wordmark">améa</div>
+      <div class="footer-grid">
+        <div><b>SHOP</b><a href="#shop" onclick="setCategory('Dresses')">Dresses</a><a href="#shop" onclick="setCategory('Skirt Sets')">Skirt Sets</a><a href="#shop" onclick="setCategory('Short Sets')">Short Sets</a><a href="#new">New Arrivals</a><a href="#collection">Collection</a></div>
+        <div><b>EXPLORE</b><a href="#about">About Améa</a><a href="#lookbook">Lookbook</a><a href="#faq">FAQ</a></div>
+        <div><b>CONTACT</b><a href="mailto:hello@amea.com">Email</a><a href="#" onclick="toast('Add your WhatsApp number in settings later');return false;">WhatsApp</a><a href="#" onclick="toast('Add your Instagram link later');return false;">Instagram</a></div>
+        <div><b>POLICIES</b><a href="#faq">Production</a><a href="#faq">Customization</a><a href="#faq">Pickup & Delivery</a><a href="#faq">Returns</a></div>
+      </div>
+      <div class="footer-bottom"><span>© 2026 Améa</span><span>Crafted with intention.</span></div>
+    </footer>
+  </main>
+
+  <section class="shop-page" id="shopPage" aria-hidden="true">
+    <div class="shop-top">
+      <button class="back" onclick="hideShop()">← Home</button>
+      <span>SHOP</span>
+    </div>
+    <h2 id="shopTitle">All Pieces</h2>
+    <div class="filters" id="filters"></div>
+    <div class="shop-grid" id="shopGrid"></div>
+  </section>
+
+  <div class="modal" id="productModal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-x" data-close-modal>×</button>
+      <div class="gallery">
+        <div class="zoom-wrap"><img id="productImage" alt=""><span class="zoom-note">Tap image to zoom</span></div>
+      </div>
+      <div class="product-detail">
+        <div class="product-kicker" id="productCategory"></div>
+        <h2 id="productName"></h2>
+        <div class="product-price" id="productPrice"></div>
+        <button class="heart-line" id="productFavorite">♡ Add to Favorites</button>
+
+        <div class="divider"></div>
+        <div class="label-row"><b>SIZE</b><button id="sizeGuideBtn">Size Guide</button></div>
+        <div class="sizes" id="sizes"></div>
+
+        <div class="custom-block" id="customBlock">
+          <b>CUSTOMIZATION</b>
+          <p>Additional cost applies to approved customization requests.</p>
+          <select id="customPreset">
+            <option value="">Select an available customization</option>
+            <option>Length adjustment</option>
+            <option>Color change</option>
+            <option>Neckline change</option>
+            <option>Strap style change</option>
+          </select>
+          <textarea id="customRequest" placeholder="Custom request"></textarea>
+        </div>
+
+        <button class="add-button" id="addToBag">ADD TO BAG</button>
+        <button class="notify-button" id="notifyButton">NOTIFY ME WHEN AVAILABLE</button>
+
+        <div class="product-notes">
+          <details><summary>Production & express</summary><p>Standard pieces may take up to two weeks. Express availability and any fee are shown only on eligible products during checkout.</p></details>
+          <details><summary>Alterations</summary><p>Alterations may be available for selected pieces and may carry an additional fee.</p></details>
+          <details><summary>Reviews</summary><p>No reviews yet. Verified customer reviews will appear here once the review system is connected.</p></details>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal info-modal" id="sizeModal">
+    <div class="info-card">
+      <button class="modal-x" data-close-info>×</button>
+      <span>AMÉA SIZE GUIDE</span>
+      <h2>Size Guide</h2>
+      <p>Measurements are in inches. Your official measurements can be added here later.</p>
+      <table>
+        <tr><th>Size</th><th>Bust</th><th>Waist</th><th>Hips</th></tr>
+        <tr><td>XS</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>S</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>M</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>L</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>XL</td><td>—</td><td>—</td><td>—</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="modal info-modal" id="accountModal">
+    <div class="info-card">
+      <button class="modal-x" data-close-info>×</button>
+      <span>SECURE CHECKOUT</span>
+      <h2>Account required</h2>
+      <p>Customers must sign in or create an account before checkout. Secure accounts, payments and order tracking are ready to be connected to the website backend.</p>
+      <button class="add-button" onclick="toast('Customer authentication needs the secure backend connection')">SIGN IN / CREATE ACCOUNT</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
